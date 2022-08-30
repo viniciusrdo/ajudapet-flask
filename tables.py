@@ -7,3 +7,12 @@ class Results(Table):
     user_password = Col('Password', show=False)
     edit = LinkCol('Edit', 'edit_view', url_kwargs=dict(id='user_id'))
     delete = LinkCol('Delete', 'delete_user', url_kwargs=dict(id='user_id'))
+
+
+    #Animal
+    animal_id = Col('Id', show=False)
+    animal_name = Col('Name')
+    animal_rescue_date = Col('Email')
+    user_password = Col('Password', show=False)
+    # edit = LinkCol('Edit', 'edit_view', url_kwargs=dict(id='user_id'))
+    # delete = LinkCol('Delete', 'delete_user', url_kwargs=dict(id='user_id'))
