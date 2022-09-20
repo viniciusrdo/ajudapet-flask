@@ -1,9 +1,20 @@
 import pymysql
+from tableUser import Results as Results_User
+from tableAnimal import Results as Results_Animal
 from app import app
-from tables import Results
 from db_config import MySQL, mysql
 from flask import flash, render_template, request, redirect
 from werkzeug.security import *
+
+
+
+@app.route("/")
+def home():
+    return render_template('index.html')
+
+@app.route("/teste")
+def index():
+  return render_template('users.html')
 
 
 @app.route('/new_user')
@@ -23,25 +34,30 @@ def add_user():
         if _name and _email and _password and request.method == 'POST':
             # do not save password as a plain text
             _hashed_password = generate_password_hash(_password)
+
+            print('<<<<<<<<<<<<<<<<<<<<<<<<<<< aquiiiii >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
             # save edits
             sql = "INSERT INTO tbl_user(user_name, user_email, user_password) VALUES(%s, %s, %s)"
             data = (_name, _email, _hashed_password,)
+
+            print('<<<<<<<<<<<<<<<<<<<<<<<<<<< aquiiiii 2 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
             conn.commit()
             flash('User added successfully!')
-            return redirect('/')
+            # return redirect('/')
+            return render_template('users.html')
         else:
             return 'Error while adding user'
-    except Exception as e:
-        print(e)
+    # except Exception as e:
+    #     print(e)
     finally:
         cursor.close()
         conn.close()
 
 
-@app.route('/')
+@app.route('/users')
 def users():
     conn = None
     cursor = None
@@ -50,7 +66,7 @@ def users():
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM tbl_user")
         rows = cursor.fetchall()
-        table = Results(rows)
+        table = Results_User(rows)
         table.border = True
         return render_template('users.html', table=table)
     except Exception as e:
@@ -131,15 +147,12 @@ def delete_user(id):
 
 
 # Animal functions above:
-#
-#
-#
-#
-#
 
+@app.route('/new_animal')
+def add_animal_view():
+    return render_template('add_animal.html')
 
-
-@app.route('/add_animal', methods=['POST','GET'])
+@app.route('/add_animal', methods=['POST'])
 def add_animal():
     conn = None
     cursor = None
@@ -157,7 +170,7 @@ def add_animal():
             cursor.execute(sql, data)
             conn.commit()
             flash('Animal added successfully!')
-            return redirect('/')
+            return render_template('animals.html')
         else:
             return 'Error while adding Animal'
     except Exception as e:
@@ -167,7 +180,7 @@ def add_animal():
         conn.close()
 
 
-@app.route('/animal')
+@app.route('/animals')
 def animals():
     conn = None
     cursor = None
@@ -176,7 +189,7 @@ def animals():
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM tbl_animal")
         rows = cursor.fetchall()
-        table = Results(rows)
+        table = Results_Animal(rows)
         table.border = True
         return render_template('animals.html', table=table)
     except Exception as e:
