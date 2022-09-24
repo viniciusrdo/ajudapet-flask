@@ -1,0 +1,25 @@
+<doctype html>
+<title>Edit Animal - Python Flask MySQL CRUD</title>
+<h2>Edit Animal</h2>
+<form method="post" action="/update">
+<dl>
+<p>
+<input name="inputAnimalName" value="{{ row['animal_name'] }}"
+                 type="text" placeholder="Name" autocomplete="off" required>
+</p>
+<p>
+    <input name="inputRescueDate" value="{{ row['animal_rescue_date'] }}"
+                 type="date" placeholder="Date" autocomplete="off" required />
+</p>
+    <p>
+     <input name="inputGender" value="{{ row['animal_gender'] }}"
+                 ttype="text" placeholder="Gender" autocomplete="off" required />
+</p>
+
+</dl>
+<p>
+<input name="id" value="{{ row['animal_id'] }}" type="hidden">
+<input type="submit" value="Submit">
+</p>
+</form>
+

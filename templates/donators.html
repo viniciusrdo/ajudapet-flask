@@ -1,0 +1,18 @@
+<doctype html>
+<title>List of Donators</title>
+
+<p><a href="{{ url_for('.add_donator_view') }}"> Add Donator </a></p>
+
+<p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+</p>
+
+{{ table }}
