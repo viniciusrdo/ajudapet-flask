@@ -1,20 +1,35 @@
 <doctype html>
-    <title>Add Animal</title>
-    <h2>Add Animal</h2>
-    <form method="post" action="/add_animal">
-        <dl>
-            <p>
-                <input name="inputAnimalName" value="" type="text" placeholder="Name" autocomplete="off" required />
-            </p>
-            <p>
-                <input name="inputRescueDate" value="" type="date" placeholder="Date" autocomplete="off" required />
-            </p>
-            <p>
-                <input name="inputGender" value="" type="text" placeholder="Gender" autocomplete="off" required />
-            </p>
-        </dl>
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </form>
+    <link rel="stylesheet" href="../static/css/add_animal.css">
+<div class="c-animal-container">
+
+    <img class="logo-img" src="../static/logo.png" alt="">
+    <br>
+
+    <p class="c-animal-title">Preencha os campos abaixo para cadastrar o animal</p>
+
+     <div class="c-animal-form">
+
+
+        <form method="post" action="/add_animal">
+
+            <label for="name">Nome:</label><br>
+            <input name="inputAnimalName" value="" type="text" placeholder="Name" autocomplete="off" required /><br><br>
+
+            <label for="date">Data de Resgate:</label><br>
+            <input name="inputRescueDate" value="" type="date" placeholder="Date" autocomplete="off" required /><br>
+            <br>
+
+            <label for="gender">Sexo:</label><br>
+           <input name="inputGender" value="" type="text" placeholder="Gender" autocomplete="off" required />
+            <br>
+
+            <br>
+
+
+            <button type="submit" value="submit" > Cadastrar</button>
+
+
+        </form>
+
+    </div>
 </doctype>

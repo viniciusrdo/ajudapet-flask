@@ -1,20 +1,32 @@
 <doctype html>
-    <title>Add Donator</title>
-    <h2>Add Donator</h2>
-    <form method="post" action="/add_donator">
-        <dl>
-            <p>
-                <input name="inputDonatorName" value="" type="text" placeholder="Name" autocomplete="off" required />
-            </p>
-            <p>
-                <input name="inputDonatorDocument" value="" type="document" placeholder="Document" autocomplete="off" required />
-            </p>
-            <p>
-                <input name="inputDonatorEmail" value="" type="text" placeholder="Email" autocomplete="off" required />
-            </p>
-        </dl>
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </form>
+    <link rel="stylesheet" href="../static/css/add_donator.css">
+<div class="c-doador-container">
+
+    <img class="logo-img" src="../static/logo.png" alt="">
+    <br>
+
+    <p class="c-doador-title">Preencha os campos abaixo para cadastrar o doador</p>
+
+    <div class="c-doador-form">
+
+
+        <form method="POST" action="/add_donator">
+
+            <label for="name">Nome:</label><br>
+            <input name="inputDonatorName" value="" type="text" placeholder="Name" autocomplete="off" required /><br>
+
+            <br>
+            <label for="document">CPF:</label><br>
+            <input name="inputDonatorDocument" value="" type="document" placeholder="Document" autocomplete="off" required /><br>
+            <br>
+
+            <label for="email">E-mail:</label><br>
+            <input name="inputDonatorEmail" value="" type="text" placeholder="Email" autocomplete="off" required /><br>
+            <br>
+
+            <button type="submit" value="submit"> Cadastrar</button>
+           <button type="submit" formaction="../tela-inicial/tela-inicial.html"> Voltar</button></a>
+        </form>
+
+    </div>
 </doctype>

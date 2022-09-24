@@ -46,7 +46,7 @@ def add_user():
             cursor.execute(sql, data)
             conn.commit()
             flash('User added successfully!')
-            # return redirect('/')
+            return redirect('/users')
             return render_template('users.html')
         else:
             return 'Error while adding user'
@@ -138,7 +138,7 @@ def delete_user(id):
         cursor.execute("DELETE FROM tbl_user WHERE user_id=%s", (id,))
         conn.commit()
         flash('User deleted successfully!')
-        return redirect('/')
+        return redirect('/users')
     except Exception as e:
         print(e)
     finally:
@@ -171,6 +171,7 @@ def add_animal():
             cursor.execute(sql, data)
             conn.commit()
             flash('Animal added successfully!')
+            return redirect('/animals')
             return render_template('animals.html')
         else:
             return 'Error while adding Animal'
@@ -259,7 +260,7 @@ def delete_animal(id):
         cursor.execute("DELETE FROM tbl_animal WHERE animal_id=%s", (id,))
         conn.commit()
         flash('Animal deleted successfully!')
-        return redirect('/')
+        return redirect('/animals')
     except Exception as e:
         print(e)
     finally:
@@ -292,6 +293,7 @@ def add_donator():
             cursor.execute(sql, data)
             conn.commit()
             flash('Donator added successfully!')
+            return redirect('/donators')
             return render_template('donators.html')
         else:
             return 'Error while adding Donator'
@@ -331,7 +333,7 @@ def delete_donator(id):
         cursor.execute("DELETE FROM tbl_donator WHERE donator_id=%s", (id,))
         conn.commit()
         flash('Donator deleted successfully!')
-        return redirect('/')
+        return redirect('/donators')
     except Exception as e:
         print(e)
     finally:
@@ -364,7 +366,8 @@ def add_adopter():
             cursor.execute(sql, data)
             conn.commit()
             flash('Adopter added successfully!')
-            return render_template('donators.html')
+            return redirect('/adopters')
+            return render_template('adopters.html')
         else:
             return 'Error while adding Adopter'
     except Exception as e:
@@ -403,7 +406,7 @@ def delete_adopter(id):
         cursor.execute("DELETE FROM tbl_adopter WHERE adopter_id=%s", (id,))
         conn.commit()
         flash('Adopter deleted successfully!')
-        return redirect('/')
+        return redirect('/adopters')
     except Exception as e:
         print(e)
     finally:
