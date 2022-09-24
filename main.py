@@ -1,6 +1,8 @@
 import pymysql
 from tableUser import Results as Results_User
 from tableAnimal import Results as Results_Animal
+from tableDonator import Results as Results_Donator
+from tableAdopter import Results as Results_Adopter
 from app import app
 from db_config import MySQL, mysql
 from flask import flash, render_template, request, redirect
@@ -309,7 +311,7 @@ def donators():
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM tbl_donator")
         rows = cursor.fetchall()
-        table = Results_User(rows)
+        table = Results_Donator(rows)
         table.border = True
         return render_template('donators.html', table=table)
     except Exception as e:
@@ -317,6 +319,97 @@ def donators():
     finally:
         cursor.close()
         conn.close()
+
+
+@app.route('/delete_donator/<int:id>')
+def delete_donator(id):
+    conn = None
+    cursor = None
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM tbl_donator WHERE donator_id=%s", (id,))
+        conn.commit()
+        flash('Donator deleted successfully!')
+        return redirect('/')
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
+# adopter below
+
+@app.route('/new_adopter')
+def add_adopter_view():
+    return render_template('add_adopter.html')
+
+
+@app.route('/add_adopter', methods=['POST'])
+def add_adopter():
+    conn = None
+    cursor = None
+    try:
+        _adoptername = request.form['inputAdopterName']
+        _adopterdocument = request.form['inputAdopterDocument']
+        _adopteremail = request.form['inputAdopterEmail']
+        # validate the received values
+        if _adoptername and _adopterdocument and _adopteremail and request.method == 'POST':
+            # save edits
+            sql = "INSERT INTO tbl_adopter(adopter_name, adopter_document, adopter_email) VALUES(%s, %s, %s)"
+            data = (_adoptername, _adopterdocument, _adopteremail,)
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute(sql, data)
+            conn.commit()
+            flash('Adopter added successfully!')
+            return render_template('donators.html')
+        else:
+            return 'Error while adding Adopter'
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/adopters')
+def adopters():
+    conn = None
+    cursor = None
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute("SELECT * FROM tbl_adopter")
+        rows = cursor.fetchall()
+        table = Results_Adopter(rows)
+        table.border = True
+        return render_template('adopters.html', table=table)
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/delete_adopter/<int:id>')
+def delete_adopter(id):
+    conn = None
+    cursor = None
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM tbl_adopter WHERE adopter_id=%s", (id,))
+        conn.commit()
+        flash('Adopter deleted successfully!')
+        return redirect('/')
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
 
 if __name__ == "__main__":
     app.run()
