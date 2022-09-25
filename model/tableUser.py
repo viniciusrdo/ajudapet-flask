@@ -1,6 +1,8 @@
 from flask_table import Table, Col, LinkCol
 
 
+# Nesta classe definimos o objeto "User" proveniente da tabela do banco de dados.
+
 class Results(Table):
     user_id = Col('Id', show=False)
     user_name = Col('Name')

@@ -1,0 +1,25 @@
+<doctype html>
+<title>Edit Donator - Python Flask MySQL CRUD</title>
+<h2>Edit Donator</h2>
+<form method="post" action="/update">
+<dl>
+<p>
+<input name="inputDonatorName" value="{{ row['donator_name'] }}"
+                 type="text" placeholder="Name" autocomplete="off" required>
+</p>
+<p>
+    <input name="inputDocument" value="{{ row['donator_document'] }}"
+                 type="date" placeholder="Date" autocomplete="off" required />
+</p>
+    <p>
+     <input name="inputDonatorEmail" value="{{ row['donator_email'] }}"
+                 ttype="text" placeholder="Gender" autocomplete="off" required />
+</p>
+
+</dl>
+<p>
+<input name="id" value="{{ row['donator_id'] }}" type="hidden">
+<input type="submit" value="Submit">
+</p>
+</form>
+

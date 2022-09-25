@@ -1,0 +1,25 @@
+<doctype html>
+<title>Edit Adopter - Python Flask MySQL CRUD</title>
+<h2>Edit Adopter</h2>
+<form method="post" action="/update">
+<dl>
+<p>
+<input name="inputAdopterName" value="{{ row['adopter_name'] }}"
+                 type="text" placeholder="Name" autocomplete="off" required>
+</p>
+<p>
+    <input name="inputAdopterDocument" value="{{ row['adopter_document'] }}"
+                 type="date" placeholder="Date" autocomplete="off" required />
+</p>
+    <p>
+     <input name="inputAdopterEmail" value="{{ row['adopter_email'] }}"
+                 ttype="text" placeholder="Gender" autocomplete="off" required />
+</p>
+
+</dl>
+<p>
+<input name="id" value="{{ row['adopter_id'] }}" type="hidden">
+<input type="submit" value="Submit">
+</p>
+</form>
+
